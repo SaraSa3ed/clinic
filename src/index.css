@@ -1,0 +1,1055 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ERP Car Wash Management System Design System */
+
+/* FLORI ATELIER Logo Animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.7) rotateX(90deg);
+  }
+  20% {
+    opacity: 0.5;
+    transform: translateY(-10px) scale(1.1) rotateX(0deg);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translateY(5px) scale(0.95) rotateX(0deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.05) rotateX(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.7) rotateX(90deg);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scale(1.3) rotate(90deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) rotate(180deg);
+  }
+  75% {
+    opacity: 0.6;
+    transform: scale(1.2) rotate(270deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(147, 51, 234, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(147, 51, 234, 0.6), 0 0 30px rgba(147, 51, 234, 0.4);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  opacity: 0;
+}
+
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Additional effects for FLORI ATELIER */
+.animate-fade-in-up:hover {
+  transform: scale(1.1) rotateY(5deg);
+  transition: transform 0.3s ease;
+}
+
+.animate-sparkle:hover {
+  animation-duration: 1s;
+  transform: scale(1.3);
+}
+
+/* Continuous wave effect */
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-wave {
+  animation: wave 15s ease-in-out infinite;
+}
+
+/* Continuous rotation effect */
+@keyframes rotate-continuous {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-continuous {
+  animation: rotate-continuous 8s linear infinite;
+}
+
+/* Continuous bounce effect */
+@keyframes bounce-continuous {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-bounce-continuous {
+  animation: bounce-continuous 1.5s ease-in-out infinite;
+}
+
+/* Continuous pulse effect */
+@keyframes pulse-continuous {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-continuous {
+  animation: pulse-continuous 2s ease-in-out infinite;
+}
+
+@layer base {
+  :root {
+    /* 🦷 عيادة بركاء التخصصية - Barka Dental Clinic Brand Colors */
+    --background: 0 0% 100%;
+    --foreground: 45 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 45 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 45 20% 15%;
+
+    /* Primary Colors - ذهبي ملكي (Royal Gold) */
+    --primary: 45 93% 47%;         /* #F59E0B - ذهبي ملكي */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 45 93% 42%;    /* أغمق عند التفاعل */
+    --primary-glow: 45 93% 55%;     /* أفتح للتوهج */
+    
+    /* Secondary Colors - بنفسجي ملكي (Royal Purple) */
+    --secondary-purple: 271 81% 50%; /* #6D28D9 - بنفسجي ملكي */
+    --secondary-purple-foreground: 0 0% 100%;
+
+    /* Modern Secondary */
+    --secondary: 45 25% 96%;
+    --secondary-foreground: 45 93% 30%;
+
+    --muted: 45 20% 96%;
+    --muted-foreground: 45 25% 40%;
+
+    --accent: 271 81% 95%;         /* بنفسجي ملكي فاتح جداً */
+    --accent-foreground: 271 81% 30%;
+
+    /* Status Colors للعيادة */
+    --success: 142 76% 42%;        /* أخضر نعناعي */
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;         /* ذهبي ملكي */
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;      /* أحمر */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 45 25% 88%;
+    --input: 45 25% 90%;
+    --ring: 45 93% 47%;
+
+    --radius: 0.75rem;
+
+    /* 🦷 Barka Dental Clinic Custom Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(45 93% 47%), hsl(271 81% 50%));
+    --gradient-dental: linear-gradient(135deg, hsl(45 93% 47%), hsl(271 81% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(45 20% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(45 93% 47%) 0%, hsl(45 85% 45%) 50%, hsl(271 81% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(271 81% 50%), hsl(271 81% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 93% 85%), hsl(271 81% 85%));
+
+    /* Shadows مع ألوان العيادة الذهبية */
+    --shadow-elegant: 0 10px 30px -10px hsl(45 93% 47% / 0.25);
+    --shadow-gold: 0 8px 25px -8px hsl(45 93% 47% / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(45 25% 20% / 0.1);
+    --shadow-card: 0 2px 10px -2px hsl(45 25% 20% / 0.08);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.4);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* 🦷 Sidebar Colors - ألوان عيادة بركاء الذهبية */
+    --sidebar-background: 45 25% 98%;      /* خلفية بيضاء مع لمسة ذهبية */
+    --sidebar-foreground: 45 93% 35%;      /* ذهبي ملكي */
+    --sidebar-primary: 45 93% 47%;         /* ذهبي ملكي فاتح */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 271 81% 95%;          /* بنفسجي ملكي فاتح */
+    --sidebar-accent-foreground: 271 81% 30%;
+    --sidebar-border: 45 25% 90%;
+    --sidebar-ring: 45 93% 47%;
+  }
+
+  /* Enhanced Animation Utilities */
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    0% {
+      opacity: 0;
+      transform: translateX(20px);
+  /* Enhanced scrollbar for better UX */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+    border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #64748b, #475569);
+    border-radius: 10px;
+    border: 2px solid #f1f5f9;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #475569, #334155);
+  }
+}
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+
+
+  
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  }
+
+  .animated-gradient {
+    background: linear-gradient(
+      -45deg,
+      hsl(var(--primary)),
+      hsl(var(--secondary-cyan)),
+      hsl(var(--primary)),
+      hsl(var(--secondary-cyan))
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Progress Effects */
+  .progress-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  .status-indicator {
+    position: relative;
+  }
+
+  .status-indicator::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    animation: pulse-glow 2s infinite;
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    transition: all 0.3s ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease-out;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  }
+
+  .hover-scale {
+    transition: transform 0.2s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-scale:active {
+    transform: scale(0.95);
+  }
+
+  .hover-rotate:hover {
+    transform: rotate(6deg);
+    transition: transform 0.3s ease;
+  }
+
+  /* Toast Styles */
+  .toast-success {
+    border-left: 4px solid hsl(var(--success));
+    background: hsl(var(--success) / 0.1);
+    animation: bounce-in 0.6s ease-out;
+  }
+
+  .toast-error {
+    border-left: 4px solid hsl(var(--destructive));
+    background: hsl(var(--destructive) / 0.1);
+    animation: bounce-in 0.6s ease-out;
+  }
+
+  .toast-warning {
+    border-left: 4px solid hsl(var(--warning));
+    background: hsl(var(--warning) / 0.1);
+    animation: bounce-in 0.6s ease-out;
+  }
+
+  /* Loading Effects */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: hsl(var(--muted));
+  }
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  .loading-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .loading-dots > div {
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    animation: bounce-scale 1.4s ease-in-out infinite;
+  }
+
+  .loading-dots > div:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .loading-dots > div:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  /* Typewriter Effect */
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid currentColor;
+    white-space: nowrap;
+    animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Meter Fill */
+  .meter-fill {
+    transition: all 1000ms ease-out;
+  }
+
+  /* Advanced Interactive */
+  .magnetic:hover {
+    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0)) scale(1.05);
+    transition: transform 0.3s ease-out;
+  }
+
+  /* Chart Animations */
+  .chart-animate {
+    animation-delay: calc(var(--index, 0) * 0.1s);
+  }
+
+  /* Focus Effects */
+  .focus-ring:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .dark {
+    /* Dark Mode for Barka Dental Clinic - مزيج من الأسود والذهبي والبنفسجي */
+    --background: 45 15% 12%;  /* ذهبي داكن مع أسود */
+    --foreground: 45 10% 95%;
+
+    --card: 45 15% 15%;  /* ذهبي داكن مع أسود */
+    --card-foreground: 45 10% 95%;
+
+    --popover: 45 15% 15%;  /* ذهبي داكن مع أسود */
+    --popover-foreground: 45 10% 95%;
+
+    --primary: 45 93% 47%;  /* ذهبي ملكي */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 45 12% 18%;  /* ذهبي داكن مع أسود */
+    --secondary-foreground: 45 10% 95%;
+
+    --muted: 45 12% 18%;  /* ذهبي داكن مع أسود */
+    --muted-foreground: 45 10% 70%;
+
+    --accent: 45 15% 25%;  /* ذهبي داكن مع أسود */
+    --accent-foreground: 45 10% 90%;
+
+    --border: 45 12% 22%;  /* ذهبي داكن مع أسود */
+    --input: 45 12% 22%;  /* ذهبي داكن مع أسود */
+    --ring: 45 93% 47%;
+
+    /* Dark Mode Status Colors مع الذهبي */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;  /* ذهبي ملكي */
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Dark Mode Additional Colors */
+    --info: 271 85% 60%;  /* بنفسجي ملكي */
+    --info-foreground: 0 0% 100%;
+    --muted-accent: 45 15% 20%;
+    --muted-accent-foreground: 45 10% 80%;
+
+    /* Dark Sidebar - مزيج من الأسود والذهبي */
+    --sidebar-background: 45 15% 8%;  /* ذهبي داكن مع أسود */
+    --sidebar-foreground: 45 10% 90%;
+    --sidebar-primary: 45 93% 47%;  /* ذهبي ملكي */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 45 12% 15%;  /* ذهبي داكن مع أسود */
+    --sidebar-accent-foreground: 45 10% 90%;
+    --sidebar-border: 45 12% 20%;  /* ذهبي داكن مع أسود */
+    --sidebar-ring: 45 93% 47%;
+
+    /* Dark Mode Gradients - مزيج من الأسود والذهبي والبنفسجي */
+    --gradient-primary: linear-gradient(135deg, hsl(45 15% 12%), hsl(45 15% 20%));
+    --gradient-dental: linear-gradient(135deg, hsl(45 15% 12%), hsl(45 15% 25%));
+    --gradient-card: linear-gradient(145deg, hsl(45 15% 15%), hsl(45 15% 18%));
+    --gradient-hero: linear-gradient(135deg, hsl(45 15% 12%) 0%, hsl(45 15% 18%) 50%, hsl(45 15% 25%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(45 15% 25%), hsl(45 15% 30%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 15% 20%), hsl(45 15% 25%));
+
+    /* Dark Mode Shadows مع الذهبي */
+    --shadow-elegant: 0 10px 30px -10px hsl(45 15% 12% / 0.4);
+    --shadow-gold: 0 8px 25px -8px hsl(45 15% 20% / 0.4);
+    --shadow-soft: 0 4px 20px -4px hsl(45 15% 15% / 0.3);
+    --shadow-card: 0 2px 10px -2px hsl(45 15% 15% / 0.2);
+    --shadow-glow: 0 0 40px hsl(45 15% 20% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground font-['Cairo'];
+    font-feature-settings: "liga" 1, "calt" 1;
+  }
+
+  /* Arabic Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Cairo'] font-semibold;
+  }
+
+      /* Custom Components */
+    .gradient-primary {
+      background: var(--gradient-primary);
+    }
+
+    .gradient-card {
+      background: var(--gradient-card);
+    }
+
+    /* Dark Mode Specific Components */
+    .dark .gradient-primary {
+      background: var(--gradient-primary);
+    }
+
+    .dark .gradient-card {
+      background: var(--gradient-card);
+    }
+
+    .dark .gradient-raghwa {
+      background: var(--gradient-raghwa);
+    }
+
+    .dark .gradient-hero {
+      background: var(--gradient-hero);
+    }
+
+    .dark .gradient-accent {
+      background: var(--gradient-accent);
+    }
+
+    .dark .gradient-secondary {
+      background: var(--gradient-secondary);
+    }
+
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-spring {
+    transition: var(--transition-spring);
+  }
+
+  /* Simple Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-200 ease-out;
+  }
+  
+  .hover-lift:hover {
+    @apply shadow-md;
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 640px) {
+    /* تحسين الـ Touch targets للموبايل */
+    button, .button, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* تحسين المساحات للشاشات الصغيرة */
+    .card-mobile {
+      @apply p-3 m-2;
+    }
+    
+    /* تحسين النصوص للموبايل */
+    h1 { @apply text-xl; }
+    h2 { @apply text-lg; }
+    h3 { @apply text-base; }
+    
+    /* تحسين الأزرار للمس */
+    .mobile-button {
+      @apply py-3 px-4 text-base;
+    }
+  }
+
+  /* Tablet Optimizations */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .tablet-grid {
+      @apply grid-cols-2;
+    }
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+
+
+  /* Safe Area Support لـ iOS */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-area-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Interactive Visual Effects */
+@layer utilities {
+  /* Hover Scale Effect */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  /* Glow Effect */
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 20px hsl(var(--secondary-cyan) / 0.3);
+  }
+
+  /* Gradient Borders */
+  .gradient-border {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary-cyan))) border-box;
+    border: 2px solid transparent;
+  }
+
+  /* Pulse Animation for Critical Items */
+  .pulse-critical {
+    animation: pulse-critical 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-critical {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+  }
+
+  /* Shimmer Loading Effect */
+  .shimmer {
+    background: linear-gradient(90deg, 
+      hsl(var(--muted)) 25%, 
+      hsl(var(--background)) 50%, 
+      hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Smooth Bounce Animation */
+  .bounce-in {
+    animation: bounce-in 0.6s ease-out;
+  }
+
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary-cyan)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  /* Button Ripple Effect */
+  .ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .ripple:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    border: 2px solid hsl(var(--muted));
+    border-top: 2px solid hsl(var(--primary));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Smooth Slide Animations */
+  .slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .slide-in-left {
+    animation: slide-in-left 0.3s ease-out;
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Floating Animation */
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Shake Animation for Errors */
+  .shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+}
+
+/* Advanced Tab Navigation Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes tabGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.tab-glow {
+  animation: tabGlow 2s infinite;
+}
+
+/* Tab Content Transitions */
+.tab-content-enter {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-content-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Improved Hover Effects for Tabs */
+[data-state="inactive"]:hover {
+  transform: translateY(-2px);
+  transition: all 0.2s ease-out;
+}
+
+[data-state="active"] {
+  transform: scale(1.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Navigation Indicator Animation */
+.nav-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  transition: width 0.3s ease-out;
+}
+
+[data-state="active"] .nav-indicator::after {
+  width: 100%;
+}
+
+/* Enhanced Card Animations for Tab Content */
+.tab-card {
+  transition: all 0.3s ease-out;
+}
+
+.tab-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Stagger Animation for Multiple Cards */
+.stagger-animation > * {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Loading Skeleton Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton {
+  animation: shimmer 1.2s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 400% 100%;
+}
